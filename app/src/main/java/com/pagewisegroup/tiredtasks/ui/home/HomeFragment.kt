@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.pagewisegroup.tiredtasks.R
 import com.pagewisegroup.tiredtasks.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -16,23 +17,31 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private var layoutManager: RecyclerView.LayoutManager? = null
+    private var adapter: RecyclerView.Adapter<TodoRecyclerAdapter.ViewHolder>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?){
+        super.onViewCreated(view, savedInstanceState)
+        val todoRecycler = view.findViewById<RecyclerView>(R.id.todo_recycler)
+        val planRecycler = view.findViewById<RecyclerView>(R.id.plan_recycler)
 
-        //val textView: TextView = binding.textHome
-        //homeViewModel.text.observe(viewLifecycleOwner) {
-            //textView.text = it
-        //}
-        return root
+        todoRecycler.apply{
+            layoutManager = LinearLayoutManager(activity)
+            adapter = TodoRecyclerAdapter()
+        }
+
+        planRecycler.apply{
+            layoutManager = LinearLayoutManager(activity)
+            adapter = PlanRecyclerAdapter()
+        }
     }
 
     override fun onDestroyView() {

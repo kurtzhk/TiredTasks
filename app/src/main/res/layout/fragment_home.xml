@@ -14,7 +14,8 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:id="@+id/todo_recycler"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -23,6 +24,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:id="@+id/plan_recycler"/>
 
 </LinearLayout>
