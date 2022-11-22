@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pagewisegroup.tiredtasks.R
 
 class PlanRecyclerAdapter: RecyclerView.Adapter<PlanRecyclerAdapter.ViewHolder>() {
+
+    //test object array
     private val text = arrayOf("four", "five", "six")
 
+    //grabs the fields from the recycler list item
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var itemText: TextView
 
@@ -25,6 +28,7 @@ class PlanRecyclerAdapter: RecyclerView.Adapter<PlanRecyclerAdapter.ViewHolder>(
         return ViewHolder(v)
     }
 
+    //populates the fields retrieved in ViewHolder class with data
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemText.text = text[position]
     }

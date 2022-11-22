@@ -8,15 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pagewisegroup.tiredtasks.R
 
 class TodoRecyclerAdapter : RecyclerView.Adapter<TodoRecyclerAdapter.ViewHolder>() {
+
+    //test object array
     private val text = arrayOf("one", "two", "three")
 
+    //grabs the fields from the recycler list item
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var itemText: TextView
 
         init{
             itemText = itemView.findViewById(R.id.todo_text)
 
-            //itemView.setOnClickListener
         }
     }
 
@@ -25,6 +27,7 @@ class TodoRecyclerAdapter : RecyclerView.Adapter<TodoRecyclerAdapter.ViewHolder>
         return ViewHolder(v)
     }
 
+    //populates the fields retrieved in ViewHolder class with data
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemText.text = text[position]
     }
