@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.pagewisegroup.tiredtasks.R
 import com.pagewisegroup.tiredtasks.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -16,23 +19,88 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private var layoutManager: RecyclerView.LayoutManager? = null
+    private var todoAdapter: RecyclerView.Adapter<TodoRecyclerAdapter.ViewHolder>? = null
+    private var planAdapter: RecyclerView.Adapter<PlanRecyclerAdapter.ViewHolder>? = null
+
+    //manages the long press on the plan recycler item
+    private val planItemTouchHelper by lazy {
+        val simpleItemTouchCallback =
+            object : ItemTouchHelper.SimpleCallback(UP or DOWN or START or END, 0) {
+
+                //for when the user moves the recycler item
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    val adapter = recyclerView.adapter
+                    val from = viewHolder.adapterPosition
+                    val to = target.adapterPosition
+                    adapter?.notifyItemMoved(from, to)
+                    return true
+                }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    TODO("Not yet implemented")
+                }
+            }
+        ItemTouchHelper(simpleItemTouchCallback)
+    }
+
+    //manages the long press on the todo recycler item
+    private val todoItemTouchHelper by lazy {
+        val simpleItemTouchCallback =
+            object : ItemTouchHelper.SimpleCallback(UP or DOWN or START or END, 0) {
+
+                //for when the user moves the recycler item
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    val adapter = recyclerView.adapter
+                    val from = viewHolder.adapterPosition
+                    val to = target.adapterPosition
+                    adapter?.notifyItemMoved(from, to)
+                    return true
+                }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    TODO("Not yet implemented")
+                }
+            }
+        ItemTouchHelper(simpleItemTouchCallback)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return view
+    }
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?){
+        super.onViewCreated(view, savedInstanceState)
+        val todoRecycler = view.findViewById<RecyclerView>(R.id.todo_recycler)
+        val planRecycler = view.findViewById<RecyclerView>(R.id.plan_recycler)
+
+        //applying managers and adapters to the recyclerview
+        todoRecycler.apply{
+            layoutManager = LinearLayoutManager(activity)
+            adapter = TodoRecyclerAdapter()
+            planItemTouchHelper.attachToRecyclerView(this)
         }
-        return root
+
+        //applying managers and adapters to the recyclerview
+        planRecycler.apply{
+            layoutManager = LinearLayoutManager(activity)
+            adapter = PlanRecyclerAdapter()
+            todoItemTouchHelper.attachToRecyclerView(this)
+        }
     }
 
     override fun onDestroyView() {
