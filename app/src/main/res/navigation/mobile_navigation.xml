@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
+        android:id="@+id/navigation_medication"
+        android:name="com.pagewisegroup.tiredtasks.ui.dashboard.MedicationFragment"
+        android:label="@string/title_medication"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.pagewisegroup.tiredtasks.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"

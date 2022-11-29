@@ -12,6 +12,11 @@
         android:title="@string/title_dashboard" />
 
     <item
+        android:id="@+id/navigation_medication"
+        android:icon="@drawable/ic_baseline_medical_services_24"
+        android:title="@string/title_medication"/>
+
+    <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/ic_baseline_message_24"
         android:title="@string/title_notifications" />
