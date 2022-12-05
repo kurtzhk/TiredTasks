@@ -23,9 +23,12 @@
         <item name="android:text">>@font/roboto</item>
 
     </style>
+    <style name="Theme.TiredTasks.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
+    <style name="Theme.TiredTasks.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-
-
-
+    <style name="Theme.TiredTasks.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
