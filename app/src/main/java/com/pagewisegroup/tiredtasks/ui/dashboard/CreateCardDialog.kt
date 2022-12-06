@@ -1,28 +1,21 @@
-package com.pagewisegroup.tiredtasks.ui.notifications
+package com.pagewisegroup.tiredtasks.ui.dashboard
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
-import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.DialogFragment
 import com.pagewisegroup.tiredtasks.R
 
-interface CreateCardDialogListener{
-    fun onFinishEditDialog(inputText: String)
-}
+class CreateCardDialog : DialogFragment(){
 
-class CreateCardDialog : DialogFragment(), OnEditorActionListener {
-
-    private var conditionEditText: EditText? = null
-    private var symptomEditText: EditText? = null
-    private var notesEditText: EditText? = null
+    lateinit var conditionEditText: EditText
+    lateinit var symptomEditText: EditText
+    lateinit var notesEditText: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,12 +23,19 @@ class CreateCardDialog : DialogFragment(), OnEditorActionListener {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.create_card_dialog, container, false)
-        //val saveButton = view.findViewById<Button>(R.id.save_button)
+        val saveButton = view.findViewById<Button>(R.id.save_button)
 
-
-        /*saveButton.setOnClickListener{
+        val db = this.context?.let { CardDatabaseManager(it) }
+        saveButton.setOnClickListener{
+            var condition = conditionEditText.text.toString()
+            var symptoms = symptomEditText.text.toString()
+            var notes = notesEditText.text.toString()
+            Log.d("condition", condition)
+            if(condition != "") {
+                db?.insert(condition, symptoms, notes)
+            }
             this.dismiss()
-        }*/
+        }
         return view
     }
 
@@ -44,30 +44,12 @@ class CreateCardDialog : DialogFragment(), OnEditorActionListener {
         conditionEditText = view.findViewById<EditText>(R.id.condition_input)
         symptomEditText = view.findViewById<EditText>(R.id.symptom_input)
         notesEditText = view.findViewById<EditText>(R.id.notes_input)
-        conditionEditText?.setOnEditorActionListener(this)
-        symptomEditText?.setOnEditorActionListener(this)
-        notesEditText?.setOnEditorActionListener(this)
+
     }
 
-    override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-        if(EditorInfo.IME_ACTION_DONE == actionId){
-            val editListener = this.activity as CreateCardDialogListener
-            editListener.onFinishEditDialog(conditionEditText?.text.toString())
-            editListener.onFinishEditDialog(symptomEditText?.text.toString())
-            editListener.onFinishEditDialog(notesEditText?.text.toString())
-            sendBackResult()
-            dismiss()
-            return true
-        }
-        return false
-    }
-
-    fun sendBackResult(){
-        val listener = this.targetFragment as CreateCardDialogListener
-        Log.d(conditionEditText?.text.toString(), "result")
-        listener.onFinishEditDialog(conditionEditText?.text.toString())
-        listener.onFinishEditDialog((symptomEditText?.text.toString()))
-        listener.onFinishEditDialog(notesEditText?.text.toString())
-        dismiss()
+    override fun onDismiss(dialog: DialogInterface) {
+        val fragment = this.targetFragment as DashboardFragment
+        fragment.handleDialogClose(dialog)
+        super.onDismiss(dialog)
     }
 }
