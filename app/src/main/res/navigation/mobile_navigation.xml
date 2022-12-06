@@ -13,8 +13,14 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.pagewisegroup.tiredtasks.ui.dashboard.DashboardFragment"
+        android:name="com.pagewisegroup.tiredtasks.ui.medication.MedicationFragment"
         android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_medication"
+        android:name="com.pagewisegroup.tiredtasks.ui.medication.MedicationFragment"
+        android:label="@string/title_medication"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
