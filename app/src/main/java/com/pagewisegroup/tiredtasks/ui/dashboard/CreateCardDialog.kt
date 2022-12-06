@@ -30,12 +30,12 @@ class CreateCardDialog : DialogFragment(), OnEditorActionListener {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.create_card_dialog, container, false)
-        val saveButton = view.findViewById<Button>(R.id.save_button)
+        //val saveButton = view.findViewById<Button>(R.id.save_button)
 
 
-        saveButton.setOnClickListener{
+        /*saveButton.setOnClickListener{
             this.dismiss()
-        }
+        }*/
         return view
     }
 
