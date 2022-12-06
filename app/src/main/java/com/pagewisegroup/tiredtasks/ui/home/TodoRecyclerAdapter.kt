@@ -68,4 +68,14 @@ class TodoRecyclerAdapter(task: MutableList<String>, prior: MutableList<String>,
     override fun getItemCount(): Int {
         return tasks.size
     }
+
+    fun getData(): MutableList<String>{
+        return tasks
+    }
+
+    fun removeItem(position: Int){
+        tasks.removeAt(position)
+        priorities.removeAt(position)
+        energies.removeAt(position)
+    }
 }

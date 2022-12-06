@@ -65,7 +65,7 @@ class HomeFragment : Fragment(), DialogCloseListener {
     //manages the long press on the todo recycler item
     private val todoItemTouchHelper by lazy {
         val simpleItemTouchCallback =
-            object : ItemTouchHelper.SimpleCallback(UP or DOWN or START or END, 0) {
+            object : ItemTouchHelper.SimpleCallback(UP or DOWN or START or END, LEFT) {
 
                 //for when the user moves the recycler item
                 override fun onMove(
@@ -81,7 +81,14 @@ class HomeFragment : Fragment(), DialogCloseListener {
                 }
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    var position = viewHolder.adapterPosition
+                    var item = todoAdapter.getData().get(position)
 
+                    val helperDB = TodoDatabaseManager(v.context)
+                    todoAdapter.removeItem(position)
+                    helperDB.removeTask(item)
+                    todoAdapter.notifyItemRemoved(position)
+                    todoAdapter.notifyDataSetChanged()
                 }
             }
         ItemTouchHelper(simpleItemTouchCallback)

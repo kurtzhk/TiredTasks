@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">TiredTasks</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_cards">Cards</string>
     <string name="title_notifications">Messaging</string>
     <string name="title_activity_medication">MedicationActivity</string>
     <!-- Strings used for fragments for navigation -->

@@ -70,8 +70,10 @@ class CardRecylcerAdapter(cond: MutableList<String>, symp: MutableList<String>, 
                 holder.conditionText.isEnabled = false
                 holder.symptomText.isEnabled = false
                 holder.notesText.isEnabled = false
+                holder.db.insert(holder.conditionText.text.toString(), holder.symptomText.text.toString(), holder.notesText.text.toString())
             }else{
                 holder.editImage.setImageResource(R.drawable.check_mark)
+                holder.db.removeCard(holder.conditionText.text.toString())
                 holder.conditionText.isEnabled = true
                 holder.symptomText.isEnabled = true
                 holder.notesText.isEnabled = true
