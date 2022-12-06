@@ -11,16 +11,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.TiredTasks.AppBarOverlay">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.TiredTasks.PopupOverlay" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+        android:theme="@style/Theme.TiredTasks.AppBarOverlay"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/medicationRecyclerView"
@@ -39,9 +30,9 @@
         android:layout_alignBottom="@id/medicationRecyclerView"
         android:layout_alignParentBottom="false"
         android:layout_marginEnd="22dp"
-        android:layout_marginBottom="22dp"
+        android:layout_marginBottom="75dp"
         android:paddingHorizontal="6dp"
         android:paddingVertical="6dp"
-        android:src="@drawable/ic_action_name"/>
+        android:src="@drawable/ic_action_name" />
 
 </RelativeLayout>

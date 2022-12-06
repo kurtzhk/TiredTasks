@@ -1,4 +1,4 @@
-package com.pagewisegroup.tiredtasks.ui.dashboard
+package com.pagewisegroup.tiredtasks.ui.medication
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

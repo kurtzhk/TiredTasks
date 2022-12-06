@@ -3,7 +3,6 @@ package com.pagewisegroup.tiredtasks.ui.home
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -114,7 +113,6 @@ class HomeFragment : Fragment(), DialogCloseListener {
         super.onViewCreated(view, savedInstanceState)
 
         val planRecycler = view.findViewById<RecyclerView>(R.id.plan_recycler)
-        val medicationButton = view.findViewById<MaterialButton>(R.id.medication_button)
         todoRecycler = view.findViewById(R.id.todo_recycler)
         v = view
         val tododb = TodoDatabaseManager(view.context)
@@ -122,13 +120,14 @@ class HomeFragment : Fragment(), DialogCloseListener {
         //reading all the info from the db to display in recyclerview
         updateView(tododb)
         todoAdapter = TodoRecyclerAdapter(tasks, priorities, energies)
+        //val medicationButton = view.findViewById<MaterialButton>(R.id.medication_button)
 
-        medicationButton.setOnClickListener {
+        /*medicationButton.setOnClickListener {
             val intent = Intent(activity, MedicationActivity::class.java)
             startActivity(intent)
             //Log.v("HomeFragment","onClick works")
             //MedicationFragment nextFrag = new MedicationFragment();
-        }
+        }*/
 
         //applying managers and adapters to the recyclerview
         todoRecycler.apply{
