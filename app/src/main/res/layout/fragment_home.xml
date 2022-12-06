@@ -113,10 +113,10 @@
         android:id="@+id/review_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="64dp"
         android:text="Review"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/medication_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

@@ -17,7 +17,6 @@ import com.google.android.material.button.MaterialButton
 import com.pagewisegroup.tiredtasks.R
 import com.pagewisegroup.tiredtasks.databinding.FragmentHomeBinding
 import com.pagewisegroup.tiredtasks.ui.dashboard.CardDatabaseManager
-import com.pagewisegroup.tiredtasks.ui.dashboard.MedicationFragment
 import com.pagewisegroup.tiredtasks.ui.medication.DialogCloseListener
 import com.pagewisegroup.tiredtasks.ui.medication.MedicationActivity
 
